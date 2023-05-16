@@ -12,7 +12,7 @@ Parameters:
       Type: String
       Description: The name of the S3 bucket which will store the results of genomics analyses.
 Resources:
-  BatchJobRole:
+  power-user-BatchJobRole:
     Type: AWS::IAM::Role
     Properties:
       Policies:
@@ -55,7 +55,7 @@ Resources:
                 - "ecs-tasks.amazonaws.com"
             Action:
               - "sts:AssumeRole"
-  BatchInstanceRole:
+  power-user-BatchInstanceRole:
     Type: AWS::IAM::Role
     Properties:
       AssumeRolePolicyDocument:
@@ -162,12 +162,12 @@ Resources:
       - "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
       - "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
       - "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"
-  BatchInstanceProfile:
+  power-user-BatchInstanceProfile:
     Type: AWS::IAM::InstanceProfile
     Properties:
       Roles:
         - Ref: BatchInstanceRole
-  BatchSpotFleetRole:
+  power-user-BatchSpotFleetRole:
     Type: AWS::IAM::Role
     Properties:
       AssumeRolePolicyDocument:
@@ -181,7 +181,7 @@ Resources:
               - "sts:AssumeRole"
       ManagedPolicyArns:
       - "arn:aws:iam::aws:policy/service-role/AmazonEC2SpotFleetTaggingRole"
-  BatchServiceRole:
+  power-user-BatchServiceRole:
     Type: AWS::IAM::Role
     Properties:
       AssumeRolePolicyDocument:
@@ -195,11 +195,11 @@ Resources:
       - arn:aws:iam::aws:policy/service-role/AWSBatchServiceRole
 Outputs:
   BatchJobRoleArn:
-    Value: !GetAtt BatchJobRole.Arn
+    Value: !GetAtt power-user-BatchJobRole.Arn
   BatchServiceRoleArn:
-    Value: !GetAtt BatchServiceRole.Arn
+    Value: !GetAtt power-user-BatchServiceRole.Arn
   BatchSpotFleetRoleArn:
-    Value: !GetAtt BatchSpotFleetRole.Arn
+    Value: !GetAtt power-user-BatchSpotFleetRole.Arn
   BatchInstanceProfileArn:
-    Value: !GetAtt BatchInstanceProfile.Arn
+    Value: !GetAtt power-user-BatchInstanceProfile.Arn
 ...
